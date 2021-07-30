@@ -13,7 +13,7 @@ const alpha = [
   "Kick",
   "Closed HH",
 ];
-// eslint-disable-next-line
+
 const beta = [
   "Chord 1",
   "Chord 2",
@@ -28,13 +28,14 @@ const beta = [
 class App extends React.Component {
   constructor() {
     super();
+    this.componentRef = React.createRef();
     this.state = {
       text: "Drum Machine",
       powerAlphaClassName: "power-toggle-off",
       powerBetaClassName: "power-toggle-on",
       bankAlphaClassName: "bank-toggle-off",
       bankBetaClassName: "bank-toggle-on",
-      disabled: false,
+      disabled: "",
       volume: 25,
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -44,102 +45,180 @@ class App extends React.Component {
     this.handleBankClick = this.handleBankClick.bind(this);
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
+
   handleKeyDown(e) {
-    switch (e.keyCode) {
-      case 81:
-        document.getElementById("Q").click();
-        document.getElementById("Q").play();
-        break;
-      case 87:
-        document.getElementById("W").click();
-        document.getElementById("W").play();
-        break;
-      case 69:
-        document.getElementById("E").click();
-        document.getElementById("E").play();
-        break;
-      case 65:
-        document.getElementById("A").click();
-        document.getElementById("A").play();
-        break;
-      case 83:
-        document.getElementById("S").click();
-        document.getElementById("S").play();
-        break;
-      case 68:
-        document.getElementById("D").click();
-        document.getElementById("D").play();
-        break;
-      case 90:
-        document.getElementById("Z").click();
-        document.getElementById("Z").play();
-        break;
-      case 88:
-        document.getElementById("X").click();
-        document.getElementById("X").play();
-        break;
-      case 67:
-        document.getElementById("C").click();
-        document.getElementById("C").play();
-        break;
-      default:
-        break;
+    if (
+      this.state.powerBetaClassName === "power-toggle-on" &&
+      this.state.bankAlphaClassName === "bank-toggle-on"
+    ) {
+      switch (e.key) {
+        case `q`:
+          this.setState({ text: alpha[0] });
+          break;
+        case `w`:
+          this.setState({ text: alpha[1] });
+          break;
+        case `e`:
+          this.setState({ text: alpha[2] });
+          break;
+        case `a`:
+          this.setState({ text: alpha[3] });
+          break;
+        case `s`:
+          this.setState({ text: alpha[4] });
+          break;
+        case `d`:
+          this.setState({ text: alpha[5] });
+          break;
+        case `z`:
+          this.setState({ text: alpha[6] });
+          break;
+        case `x`:
+          this.setState({ text: alpha[7] });
+          break;
+        case `c`:
+          this.setState({ text: alpha[8] });
+          break;
+        default:
+          break;
+      }
+    } else if (
+      this.state.powerBetaClassName === "power-toggle-on" &&
+      this.state.bankBetaClassName === "bank-toggle-on"
+    ) {
+      switch (e.key) {
+        case `q`:
+          this.setState({ text: beta[0] });
+          break;
+        case `w`:
+          this.setState({ text: beta[1] });
+          break;
+        case `e`:
+          this.setState({ text: beta[2] });
+          break;
+        case `a`:
+          this.setState({ text: beta[3] });
+          break;
+        case `s`:
+          this.setState({ text: beta[4] });
+          break;
+        case `d`:
+          this.setState({ text: beta[5] });
+          break;
+        case `z`:
+          this.setState({ text: beta[6] });
+          break;
+        case `x`:
+          this.setState({ text: beta[7] });
+          break;
+        case `c`:
+          this.setState({ text: beta[8] });
+          break;
+        default:
+          break;
+      }
     }
   }
 
   handleButtonClick(e) {
-    switch (e.target.id) {
-      case "Q":
-        this.setState({ text: alpha[0] });
-        //document.getElementById("Q").play();
-        break;
-      case "W":
-        this.setState({ text: alpha[1] });
-        //document.getElementById("W").play();
-        break;
-      case "E":
-        this.setState({ text: alpha[2] });
-        //document.getElementById("E").play();
-        break;
-      case "A":
-        this.setState({ text: alpha[3] });
-        //document.getElementById("A").play();
-        break;
-      case "S":
-        this.setState({ text: alpha[4] });
-        //document.getElementById("S").play();
-        break;
-      case "D":
-        this.setState({ text: alpha[5] });
-        //document.getElementById("D").play();
-        break;
-      case "Z":
-        this.setState({ text: alpha[6] });
-        //document.getElementById("Z").play();
-        break;
-      case "X":
-        this.setState({ text: alpha[7] });
-        //document.getElementById("X").play();
-        break;
-      case "C":
-        this.setState({ text: alpha[8] });
-        //document.getElementById("C").play();
-        break;
-      default:
-        break;
+    if (
+      this.state.powerBetaClassName === "power-toggle-on" &&
+      this.state.bankAlphaClassName === "bank-toggle-on"
+    ) {
+      switch (e.target.id) {
+        case "Q":
+          this.setState({ text: alpha[0] });
+          // let Q = document.getElementById("Q");
+          // let audio = new Audio(Q.children[0].src);
+          this.componentRef.current.children[0].play();
+          break;
+        case "W":
+          this.setState({ text: alpha[1] });
+          break;
+        case "E":
+          this.setState({ text: alpha[2] });
+          break;
+        case "A":
+          this.setState({ text: alpha[3] });
+          break;
+        case "S":
+          this.setState({ text: alpha[4] });
+          break;
+        case "D":
+          this.setState({ text: alpha[5] });
+          break;
+        case "Z":
+          this.setState({ text: alpha[6] });
+          break;
+        case "X":
+          this.setState({ text: alpha[7] });
+          break;
+        case "C":
+          this.setState({ text: alpha[8] });
+          break;
+        default:
+          break;
+      }
+    } else if (
+      this.state.powerBetaClassName === "power-toggle-on" &&
+      this.state.bankBetaClassName === "bank-toggle-on"
+    ) {
+      switch (e.target.id) {
+        case "Q":
+          this.setState({ text: beta[0] });
+          break;
+        case "W":
+          this.setState({ text: beta[1] });
+          break;
+        case "E":
+          this.setState({ text: beta[2] });
+          break;
+        case "A":
+          this.setState({ text: beta[3] });
+          break;
+        case "S":
+          this.setState({ text: beta[4] });
+          break;
+        case "D":
+          this.setState({ text: beta[5] });
+          break;
+        case "Z":
+          this.setState({ text: beta[6] });
+          break;
+        case "X":
+          this.setState({ text: beta[7] });
+          break;
+        case "C":
+          this.setState({ text: beta[8] });
+          break;
+        default:
+          break;
+      }
     }
   }
 
   handlePowerClick() {
     this.setState({
       powerAlphaClassName: `${
-        "power-toggle-off" ? "power-toggle-on" : "power-toggle-off"
+        this.state.powerAlphaClassName === "power-toggle-off"
+          ? "power-toggle-on"
+          : "power-toggle-off"
       }`,
       powerBetaClassName: `${
-        "power-toggle-on" ? "power-toggle-off" : "power-toggle-on"
+        this.state.powerBetaClassName === "power-toggle-on"
+          ? "power-toggle-off"
+          : "power-toggle-on"
       }`,
-      disabled: false ? true : false,
+      disabled: `${this.state.disabled === "" ? "true" : ""}`,
     });
+    if (!this.state.disabled) {
+      this.setState({ text: "" });
+    } else if (this.state.disabled) {
+      this.setState({ text: this.state.text });
+    }
   }
 
   handleRangeDrag(e) {
@@ -147,16 +226,21 @@ class App extends React.Component {
       text: "Volume: " + e.target.value,
       volume: e.target.value,
     });
-    document.getElementsByTagName("audio").volume = this.state.volume;
+    let audio = document.getElementsByTagName("audio");
+    audio[0].volume = this.state.volume / 100;
   }
 
   handleBankClick() {
     this.setState({
       bankAlphaClassName: `${
-        "bank-toggle-off" ? "bank-toggle-on" : "bank-toggle-off"
+        this.state.bankAlphaClassName === "bank-toggle-off"
+          ? "bank-toggle-on"
+          : "bank-toggle-off"
       }`,
       bankBetaClassName: `${
-        "bank-toggle-on" ? "bank-toggle-off" : "bank-toggle-on"
+        this.state.bankBetaClassName === "bank-toggle-on"
+          ? "bank-toggle-off"
+          : "bank-toggle-on"
       }`,
     });
   }
@@ -172,150 +256,175 @@ class App extends React.Component {
               </p>
             </div>
             <div id="drum-machine-display">
-              <div
-                id="drum-pad-container"
-                className="drum-pad-container"
-                tabindex="0"
-                disabled={this.state.disabled}
-                onKeyDown={this.handleKeyDown}
-              >
+              <div id="drum-pad-container" className="drum-pad-container">
                 <button
                   id="Q"
                   className="drum-pad"
                   keyCode="81"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
+                  ref={(node) => (this.componentRef.current = node)}
                 >
                   <audio
                     id="Q"
                     className="clip"
                     keyCode="81"
-                    src="./public/audio/mixkit-acute-guitar-single-string-2325.mp3"
+                    src="../public/audio/mixkit-acute-guitar-single-string-2325.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  Q
+                  <audio src=""></audio>Q
                 </button>
                 <button
                   id="W"
                   className="drum-pad"
                   keyCode="87"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="W"
                     className="clip"
                     keyCode="87"
                     src="./public/audio/mixkit-cool-guitar-riff-2321.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  W
+                  <audio src=""></audio>W
                 </button>
                 <button
                   id="E"
                   className="drum-pad"
                   keyCode="69"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="E"
                     className="clip"
                     keyCode="69"
                     src="./public/audio/mixkit-guitar-notification-alert-2320.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  E
+                  <audio src=""></audio>E
                 </button>
                 <button
                   id="A"
                   className="drum-pad"
                   keyCode="65"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="A"
                     className="clip"
                     keyCode="65"
                     src="./public/audio/mixkit-guitar-string-tone-2326.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  A
+                  <audio src=""></audio>A
                 </button>
                 <button
                   id="S"
                   className="drum-pad"
                   keyCode="83"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="S"
                     className="clip"
                     keyCode="83"
                     src="./public/audio/mixkit-happy-guitar-chords-2319.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  S
+                  <audio src=""></audio>S
                 </button>
                 <button
                   id="D"
                   className="drum-pad"
                   keyCode="68"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="D"
                     className="clip"
                     keyCode="68"
                     src="./public/audio/mixkit-negative-guitar-tone-2324.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  D
+                  <audio src=""></audio>D
                 </button>
                 <button
                   id="Z"
                   className="drum-pad"
                   keyCode="90"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="Z"
                     className="clip"
                     keyCode="90"
                     src="./public/audio/mixkit-quick-guitar-tone-2323.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  Z
+                  <audio src=""></audio>Z
                 </button>
                 <button
                   id="X"
                   className="drum-pad"
                   keyCode="88"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="X"
                     className="clip"
                     keyCode="88"
                     src="./public/audio/mixkit-short-guitar-riff-2322.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  X
+                  <audio src=""></audio>X
                 </button>
                 <button
                   id="C"
                   className="drum-pad"
                   keyCode="67"
                   onClick={this.handleButtonClick}
+                  disabled={this.state.disabled}
                 >
                   <audio
                     id="C"
                     className="clip"
                     keyCode="67"
                     src="./public/audio/mixkit-short-guitar-strum-2318.mp3"
+                    type="audio/mpeg"
+                    volume={this.state.volume}
                   ></audio>
-                  C
+                  <audio src=""></audio>C
                 </button>
               </div>
               <div className="controls-container">
                 <div className="power-control">
                   <p className="text">Power</p>
-                  <div
-                    className="power-toggle"
-                    tabindex="0"
-                    onClick={this.handlePowerClick}
-                  >
-                    <div className={this.state.powerAlphaClassName}></div>
-                    <div className={this.state.powerBetaClassName}></div>
+                  <div className="power-buttons">
+                    <span className="power-desc">OFF</span>
+                    <div
+                      className="power-toggle"
+                      onClick={this.handlePowerClick}
+                    >
+                      <div className={this.state.powerAlphaClassName}></div>
+                      <div className={this.state.powerBetaClassName}></div>
+                    </div>
+                    <span className="power-desc">ON</span>
                   </div>
                 </div>
                 <div className="text-display">
@@ -331,14 +440,13 @@ class App extends React.Component {
                   className="volume-control"
                   value={this.state.volume}
                   onChange={this.handleRangeDrag}
+                  disabled={this.state.disabled}
                 ></input>
                 <div className="bank-control">
                   <p className="text">Bank</p>
                   <div
                     className="bank-toggle"
-                    tabindex="0"
-                    onClick={this.handleBankClick}
-                    // disabled={this.state.disabled}
+                    onClick={!this.state.disabled && this.handleBankClick}
                   >
                     <div className={this.state.bankAlphaClassName}></div>
                     <div className={this.state.bankBetaClassName}></div>

@@ -88,6 +88,7 @@
 .drum-pad:active {
   box-shadow: 0 2px #666;
   transform: translateY(4px);
+  background-color: orange;
 }
 
 .controls-container {
@@ -120,13 +121,32 @@
   padding: 0;
 }
 
+.power-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  width: 65%;
+  height: 32%;
+}
+
+.power-desc {
+  display: block;
+  color: black;
+  align-self: center;
+  min-width: 5%;
+  font-size: 0.5em;
+}
+
 .power-toggle {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex-grow: 1;
-  border: 3px solid black;
+  border: 5px solid black;
   width: 35%;
-  height: 50%;
+  height: 100%;
   align-self: center;
   margin: 0;
   padding: 0;
@@ -291,7 +311,7 @@ input[type="range"]:focus::-ms-fill-upper {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  border: 3px solid black;
+  border: 5px solid black;
   width: 35%;
   height: 50%;
   align-self: center;

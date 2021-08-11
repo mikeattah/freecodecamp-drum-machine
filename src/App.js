@@ -26,9 +26,8 @@ const beta = [
   "Snare",
 ];
 class App extends React.Component {
-  constructor() {
-    super();
-    this.componentRef = React.createRef();
+  constructor(props) {
+    super(props);
     this.state = {
       text: "Drum Machine",
       powerAlphaClassName: "power-toggle-off",
@@ -38,7 +37,9 @@ class App extends React.Component {
       disabled: "",
       volume: 25,
     };
-    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
+    this.handleClickAndPlay = this.handleClickAndPlay.bind(this);
+    // this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handlePowerClick = this.handlePowerClick.bind(this);
     this.handleRangeDrag = this.handleRangeDrag.bind(this);
@@ -49,38 +50,64 @@ class App extends React.Component {
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
   }
 
+  handlePlay(x) {
+    let playElement = document.querySelector(`audio#${x}.clip`);
+    console.log(playElement);
+    playElement.play();
+  }
+
+  handleClickAndPlay(x) {
+    let a = x.toUpperCase();
+    let clickElement = document.querySelector(`button#${a}.drum-pad`);
+    let playElement = document.querySelector(`audio#${a}.clip`);
+    console.log(clickElement, playElement);
+    clickElement.click();
+    playElement.play();
+  }
+
   handleKeyDown(e) {
+    e.preventDefault();
     if (
       this.state.powerBetaClassName === "power-toggle-on" &&
       this.state.bankAlphaClassName === "bank-toggle-on"
     ) {
-      switch (e.key) {
+      const a = e.key.toLowerCase();
+      switch (a) {
         case `q`:
           this.setState({ text: alpha[0] });
+          this.handleClickAndPlay(`q`);
           break;
         case `w`:
           this.setState({ text: alpha[1] });
+          this.handleClickAndPlay(`w`);
           break;
         case `e`:
           this.setState({ text: alpha[2] });
+          this.handleClickAndPlay(`e`);
           break;
         case `a`:
           this.setState({ text: alpha[3] });
+          this.handleClickAndPlay(`a`);
           break;
         case `s`:
           this.setState({ text: alpha[4] });
+          this.handleClickAndPlay(`s`);
           break;
         case `d`:
           this.setState({ text: alpha[5] });
+          this.handleClickAndPlay(`d`);
           break;
         case `z`:
           this.setState({ text: alpha[6] });
+          this.handleClickAndPlay(`z`);
           break;
         case `x`:
           this.setState({ text: alpha[7] });
+          this.handleClickAndPlay(`x`);
           break;
         case `c`:
           this.setState({ text: alpha[8] });
+          this.handleClickAndPlay(`c`);
           break;
         default:
           break;
@@ -89,33 +116,43 @@ class App extends React.Component {
       this.state.powerBetaClassName === "power-toggle-on" &&
       this.state.bankBetaClassName === "bank-toggle-on"
     ) {
-      switch (e.key) {
+      const b = e.key.toLowerCase();
+      switch (b) {
         case `q`:
           this.setState({ text: beta[0] });
+          this.handleClickAndPlay(`q`);
           break;
         case `w`:
           this.setState({ text: beta[1] });
+          this.handleClickAndPlay(`w`);
           break;
         case `e`:
           this.setState({ text: beta[2] });
+          this.handleClickAndPlay(`e`);
           break;
         case `a`:
           this.setState({ text: beta[3] });
+          this.handleClickAndPlay(`a`);
           break;
         case `s`:
           this.setState({ text: beta[4] });
+          this.handleClickAndPlay(`s`);
           break;
         case `d`:
           this.setState({ text: beta[5] });
+          this.handleClickAndPlay(`d`);
           break;
         case `z`:
           this.setState({ text: beta[6] });
+          this.handleClickAndPlay(`z`);
           break;
         case `x`:
           this.setState({ text: beta[7] });
+          this.handleClickAndPlay(`x`);
           break;
         case `c`:
           this.setState({ text: beta[8] });
+          this.handleClickAndPlay(`c`);
           break;
         default:
           break;
@@ -131,33 +168,39 @@ class App extends React.Component {
       switch (e.target.id) {
         case "Q":
           this.setState({ text: alpha[0] });
-          // let Q = document.getElementById("Q");
-          // let audio = new Audio(Q.children[0].src);
-          this.componentRef.current.children[0].play();
+          this.handlePlay("Q");
           break;
         case "W":
           this.setState({ text: alpha[1] });
+          this.handlePlay("W");
           break;
         case "E":
           this.setState({ text: alpha[2] });
+          this.handlePlay("E");
           break;
         case "A":
           this.setState({ text: alpha[3] });
+          this.handlePlay("A");
           break;
         case "S":
           this.setState({ text: alpha[4] });
+          this.handlePlay("S");
           break;
         case "D":
           this.setState({ text: alpha[5] });
+          this.handlePlay("D");
           break;
         case "Z":
           this.setState({ text: alpha[6] });
+          this.handlePlay("Z");
           break;
         case "X":
           this.setState({ text: alpha[7] });
+          this.handlePlay("X");
           break;
         case "C":
           this.setState({ text: alpha[8] });
+          this.handlePlay("C");
           break;
         default:
           break;
@@ -169,30 +212,39 @@ class App extends React.Component {
       switch (e.target.id) {
         case "Q":
           this.setState({ text: beta[0] });
+          this.handlePlay("Q");
           break;
         case "W":
           this.setState({ text: beta[1] });
+          this.handlePlay("W");
           break;
         case "E":
           this.setState({ text: beta[2] });
+          this.handlePlay("E");
           break;
         case "A":
           this.setState({ text: beta[3] });
+          this.handlePlay("A");
           break;
         case "S":
           this.setState({ text: beta[4] });
+          this.handlePlay("S");
           break;
         case "D":
           this.setState({ text: beta[5] });
+          this.handlePlay("D");
           break;
         case "Z":
           this.setState({ text: beta[6] });
+          this.handlePlay("Z");
           break;
         case "X":
           this.setState({ text: beta[7] });
+          this.handlePlay("X");
           break;
         case "C":
           this.setState({ text: beta[8] });
+          this.handlePlay("C");
           break;
         default:
           break;
@@ -217,7 +269,7 @@ class App extends React.Component {
     if (!this.state.disabled) {
       this.setState({ text: "" });
     } else if (this.state.disabled) {
-      this.setState({ text: this.state.text });
+      this.setState({ text: "Drum Machine" });
     }
   }
 
@@ -226,8 +278,6 @@ class App extends React.Component {
       text: "Volume: " + e.target.value,
       volume: e.target.value,
     });
-    let audio = document.getElementsByTagName("audio");
-    audio[0].volume = this.state.volume / 100;
   }
 
   handleBankClick() {
@@ -252,164 +302,155 @@ class App extends React.Component {
           <div id="drum-machine">
             <div className="fcc-logo">
               <p className="fcc-text">
-                FCC <i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                FCC <i className="fa fa-free-code-camp" aria-hidden="true"></i>
               </p>
             </div>
             <div id="drum-machine-display">
               <div id="drum-pad-container" className="drum-pad-container">
                 <button
+                  ref={(node) => (this.Qbutton = node)}
                   id="Q"
                   className="drum-pad"
-                  keyCode="81"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
-                  ref={(node) => (this.componentRef.current = node)}
                 >
                   <audio
                     id="Q"
                     className="clip"
-                    keyCode="81"
-                    src="../public/audio/mixkit-acute-guitar-single-string-2325.mp3"
+                    src="/audio/mixkit-acute-guitar-single-string-2325.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>Q
+                  Q
                 </button>
                 <button
                   id="W"
                   className="drum-pad"
-                  keyCode="87"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="W"
                     className="clip"
-                    keyCode="87"
-                    src="./public/audio/mixkit-cool-guitar-riff-2321.mp3"
+                    src="/audio/mixkit-cool-guitar-riff-2321.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>W
+                  W
                 </button>
                 <button
                   id="E"
                   className="drum-pad"
-                  keyCode="69"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="E"
                     className="clip"
-                    keyCode="69"
-                    src="./public/audio/mixkit-guitar-notification-alert-2320.mp3"
+                    src="/audio/mixkit-guitar-notification-alert-2320.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>E
+                  E
                 </button>
                 <button
                   id="A"
                   className="drum-pad"
-                  keyCode="65"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="A"
                     className="clip"
-                    keyCode="65"
-                    src="./public/audio/mixkit-guitar-string-tone-2326.mp3"
+                    src="/audio/mixkit-guitar-string-tone-2326.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>A
+                  A
                 </button>
                 <button
                   id="S"
                   className="drum-pad"
-                  keyCode="83"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="S"
                     className="clip"
-                    keyCode="83"
-                    src="./public/audio/mixkit-happy-guitar-chords-2319.mp3"
+                    src="/audio/mixkit-happy-guitar-chords-2319.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>S
+                  S
                 </button>
                 <button
                   id="D"
                   className="drum-pad"
-                  keyCode="68"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="D"
                     className="clip"
-                    keyCode="68"
-                    src="./public/audio/mixkit-negative-guitar-tone-2324.mp3"
+                    src="/audio/mixkit-negative-guitar-tone-2324.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>D
+                  D
                 </button>
                 <button
                   id="Z"
                   className="drum-pad"
-                  keyCode="90"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="Z"
                     className="clip"
-                    keyCode="90"
-                    src="./public/audio/mixkit-quick-guitar-tone-2323.mp3"
+                    src="/audio/mixkit-quick-guitar-tone-2323.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>Z
+                  Z
                 </button>
                 <button
                   id="X"
                   className="drum-pad"
-                  keyCode="88"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="X"
                     className="clip"
-                    keyCode="88"
-                    src="./public/audio/mixkit-short-guitar-riff-2322.mp3"
+                    src="/audio/mixkit-short-guitar-riff-2322.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>X
+                  X
                 </button>
                 <button
                   id="C"
                   className="drum-pad"
-                  keyCode="67"
                   onClick={this.handleButtonClick}
                   disabled={this.state.disabled}
                 >
                   <audio
                     id="C"
                     className="clip"
-                    keyCode="67"
-                    src="./public/audio/mixkit-short-guitar-strum-2318.mp3"
+                    src="/audio/mixkit-short-guitar-strum-2318.mp3"
                     type="audio/mpeg"
-                    volume={this.state.volume}
+                    volume={this.state.volume / 100}
+                    autoplay
                   ></audio>
-                  <audio src=""></audio>C
+                  C
                 </button>
               </div>
               <div className="controls-container">
